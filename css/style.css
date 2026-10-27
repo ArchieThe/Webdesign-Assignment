@@ -25,10 +25,7 @@
   --mono: "SF Mono", "Cascadia Code", Consolas, "Courier New", monospace;
 }
 
-/* --- Reset ---------------------------------------------------------------
-   border-box means padding and border count INSIDE an element's declared
-   width, so a 300px box stays 300px once padding is added.
-   ------------------------------------------------------------------------- */
+/* Reset */
 *, *::before, *::after { box-sizing: border-box; }
 
 [hidden] { display: none !important; }
@@ -42,7 +39,7 @@ body {
   background: var(--page-bg);
 }
 
-/* --- Layout --------------------------------------------------------------- */
+/*  Layout */
 .container {
   width: 100%;
   max-width: 1040px;
@@ -54,7 +51,7 @@ main { padding: 2rem 0 3rem; }
 
 section { margin-bottom: 2.5rem; }
 
-/* --- Typography ----------------------------------------------------------- */
+/* Typography */
 h1, h2, h3 { line-height: 1.25; color: var(--navy); margin: 0 0 0.6em; }
 h1 { font-size: 2rem; }
 h2 { font-size: 1.45rem; border-bottom: 2px solid var(--border); padding-bottom: 0.35em; }
