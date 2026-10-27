@@ -60,4 +60,3 @@ p  { margin: 0 0 1rem; }
 a  { color: var(--teal-dark); }
 a:hover { color: var(--navy); }
 
-.lead { font-size: 1.1rem; color: var(--text-muted); }
