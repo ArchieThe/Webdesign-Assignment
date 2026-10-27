@@ -114,3 +114,27 @@ a:hover { color: var(--navy); }
   gap: 0.5rem;
 }
 .site-footer strong { color: #fff; }
+
+/* Page banner */
+.banner {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--teal-dark) 100%);
+  color: #fff;
+  padding: 2.5rem 0;
+}
+.banner h1 { color: #fff; margin-bottom: 0.3em; }
+.banner p  { color: #cfe0e0; margin: 0; max-width: 60ch; }
+
+/* Cards */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.25rem;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--gap);
+}
