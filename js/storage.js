@@ -1,15 +1,4 @@
-/* ==========================================================================
-   storage.js — a safe wrapper around the browser's storage
-   --------------------------------------------------------------------------
-   Browser storage can throw instead of returning a value: private browsing
-   mode, a browser set to block site data, or a page opened straight from disk
-   can all make localStorage unavailable. If that happened and we had not
-   planned for it, the whole page would stop running on the first line that
-   touched storage.
-
-   Every read and write therefore goes through these two functions, which
-   catch the error and let the application carry on with its in-memory data.
-   ========================================================================== */
+/* storage.js — a safe wrapper around the browser's storage */
 
 /**
  * Read a JSON value previously written by storageSet.
