@@ -218,3 +218,69 @@ textarea:focus-visible {
 
 .result-count { font-size: 0.9rem; color: var(--text-muted); margin: 0 0 0.75rem; }
 #gallery-counter { text-align: center; }
+
+/* Event list */
+.event-list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--gap); }
+
+.event {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-left: 5px solid var(--teal);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.1rem 1.25rem;
+}
+.event:hover { box-shadow: var(--shadow-lift); }
+/* A recommended event is marked by a class, so the colour change is visual */
+.event.is-recommended { border-left-color: var(--amber); background: #fffdf6; }
+
+/* Title block above, badges below. Keeping them stacked at every width means
+   a long event title and a short one produce the same card layout. */
+.event-head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.45rem;
+}
+.event-title { font-size: 1.1rem; font-weight: 700; color: var(--navy); margin: 0; }
+.event-course { font-size: 0.88rem; color: var(--text-muted); font-weight: 600; }
+
+.event-meta {
+  list-style: none;
+  margin: 0.6rem 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.1rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+.event-meta strong { color: var(--text); font-weight: 600; }
+
+.event-desc  { margin: 0.5rem 0; }
+.event-notes {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  border-left: 3px solid var(--border);
+  padding-left: 0.75rem;
+  margin: 0.5rem 0;
+}
+.event-actions { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.8rem; }
+
+/* Badges */
+.badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: #e7ebf3;
+  color: var(--navy);
+}
+.badge-category { background: #e3eef2; color: var(--teal-dark); }
+.badge-mode     { background: #ecebf5; color: var(--navy-light); }
+/* The recommended badge is a different colour — this is the visual status
+   change the assignment brief asks for. */
+.badge-recommended { background: var(--amber); color: #fff; }

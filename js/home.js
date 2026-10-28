@@ -1,10 +1,5 @@
-/* ==========================================================================
-   home.js — the event image gallery on the home page
-   --------------------------------------------------------------------------
-   The assignment requires at least three images of different events and a
-   button that cycles through them. The images are listed here rather than in
-   the HTML so that adding a fourth image means editing one array.
-   ========================================================================== */
+
+/* home.js — the event image gallery on the home page*/
 
 (function () {
   const GALLERY = [

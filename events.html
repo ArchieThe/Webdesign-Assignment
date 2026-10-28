@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Browse, search, add, update and delete campus events. Restricted to signed-in student representatives.">
+  <title>Adelaide Campus Events — Events Directory</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <a class="site-title" href="index.html">Adelaide Campus Events</a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="events.html" aria-current="page">Events Directory</a></li>
+          <li><a href="blog.html">Troubleshooting Blog</a></li>
+          <li><a href="ethics.html">Ethics &amp; Privacy</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="banner">
+    <div class="container">
+      <h1>Campus Events Directory</h1>
+      <p>Browse what is on, search by keyword, filter by category, and manage event
+         listings. Sign in to continue.</p>
+    </div>
+  </div>
+
+  <main class="container">
+
+    <div id="app-panel">
+
+      <!-- All events -->
+      <section aria-labelledby="all-heading">
+        <h2 id="all-heading">All Events</h2>
+        <ul id="event-list" class="event-list"></ul>
+        <p id="empty-state" class="empty-state" hidden>
+          No events match your search. Try a different keyword or set the category
+          back to "All categories".
+        </p>
+      </section>
+
+    </div><!-- /#app-panel -->
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span>Adelaide Campus Events &middot; INFO 1012 Assignment 3</span>
+      <span>Current date and time: <strong><time id="live-clock"></time></strong></span>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/clock.js"></script>
+</body>
+</html>

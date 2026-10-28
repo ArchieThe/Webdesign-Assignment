@@ -2,7 +2,7 @@
 /* clock.js — the live date and time shown in the page footer*/
 
 (function () {
-  const clock = document.getElementById('live-clock');
+  const clock = document.getElementById(' ');
 
   // leaving early avoids an error.
   if (!clock) return;
