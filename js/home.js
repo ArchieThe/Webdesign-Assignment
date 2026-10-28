@@ -67,10 +67,7 @@
     });
   }
 
-  /* The modulo operator (%) is what makes the gallery cycle: when `current`
-     reaches the end of the array it wraps back around to 0 instead of running
-     off the end. Adding GALLERY.length before the % handles going backwards,
-     because in JavaScript -1 % 4 is -1, not 3. */
+  /* The modulo operator (%) is what makes the gallery cycle */
   function step(by) {
     current = (current + by + GALLERY.length) % GALLERY.length;
     show(current);
