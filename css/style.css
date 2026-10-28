@@ -138,3 +138,83 @@ a:hover { color: var(--navy); }
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: var(--gap);
 }
+
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  font: inherit;
+  font-weight: 600;
+  padding: 0.55rem 1.1rem;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: var(--teal);
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn:hover    { background: var(--teal-dark); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btn-secondary { background: #fff; color: var(--navy); border-color: var(--border); }
+.btn-secondary:hover { background: #eef1f7; }
+
+.btn-danger  { background: var(--red); }
+.btn-danger:hover { background: #8e1e18; }
+
+.btn-small { padding: 0.3rem 0.7rem; font-size: 0.85rem; }
+
+/* Keyboard focus must stay visible — removing it breaks keyboard navigation. */
+.btn:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--amber);
+  outline-offset: 2px;
+}
+
+/* Image gallery (home page) */
+.gallery figure {
+  margin: 0;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+/* max-height stops a wide screen stretching the illustration so tall that the
+   caption falls below the fold. object-fit keeps it undistorted. */
+.gallery img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 420px;
+  object-fit: contain;
+  background: #16233f;
+}
+.gallery figcaption {
+  padding: 0.85rem 1rem;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+}
+.gallery figcaption strong { color: var(--navy); display: block; }
+
+.gallery-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 0.9rem;
+}
+.gallery-dots { display: flex; gap: 0.35rem; }
+.gallery-dots span {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--border);
+}
+.gallery-dots span.active { background: var(--teal); }
+
+.result-count { font-size: 0.9rem; color: var(--text-muted); margin: 0 0 0.75rem; }
+#gallery-counter { text-align: center; }

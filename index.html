@@ -36,6 +36,30 @@
 
   <main class="container">
 
+    <!-- Image gallery -->
+    <section class="gallery" aria-labelledby="gallery-heading">
+      <h2 id="gallery-heading">What's on around campus</h2>
+      <p>Four kinds of event you will find in the directory. Use the buttons to cycle
+         through them.</p>
+
+      <figure>
+        <!-- src and alt are both set by js/home.js when the page loads -->
+        <img id="gallery-image" src="images/event-academic.svg" alt="">
+        <figcaption>
+          <strong id="gallery-title"></strong>
+          <span id="gallery-caption"></span>
+        </figcaption>
+      </figure>
+
+      <div class="gallery-controls">
+        <button type="button" id="gallery-prev" class="btn btn-secondary">&larr; Previous</button>
+        <div id="gallery-dots" class="gallery-dots" aria-hidden="true"></div>
+        <button type="button" id="gallery-next" class="btn">Next image &rarr;</button>
+      </div>
+      <!-- aria-live means a screen reader announces the change when the image cycles -->
+      <p id="gallery-counter" class="result-count" aria-live="polite"></p>
+    </section>
+
     <!-- About the App -->
     <section aria-labelledby="about-app-heading">
       <h2 id="about-app-heading">About the App</h2>
@@ -110,7 +134,7 @@
            dashboard in Excel with pivot tables and conditional formatting]</strong>.</p>
         <p>The part I have found most interesting is <strong> how a single page
            request travels down five protocol layers and back up again, because it
-           makes something I use every day make actual sense</strong>. 
+           makes something I use every day make actual sense</strong>.</p>
 
         <h3>Events I have would like to attend</h3>
         <ul>
