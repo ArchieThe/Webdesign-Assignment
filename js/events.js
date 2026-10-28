@@ -1,7 +1,7 @@
 /* ==========================================================================
    events.js — the campus events directory
    --------------------------------------------------------------------------
-   Stage 1: load the events and display them.
+   Stage 2: display the events, and let the user search, filter and sort them.
 
    Wrapped in an IIFE (Immediately Invoked Function Expression) so that the
    names declared inside stay private to this file instead of becoming global
@@ -15,7 +15,12 @@
   /** The working list of events, held in memory while the page is open. */
   let events = [];
 
-  const listEl = document.getElementById('event-list');
+  const listEl         = document.getElementById('event-list');
+  const countEl        = document.getElementById('result-count');
+  const emptyEl        = document.getElementById('empty-state');
+  const searchInput    = document.getElementById('search-input');
+  const categorySelect = document.getElementById('category-filter');
+  const sortSelect     = document.getElementById('sort-order');
 
   if (!listEl) return;   // not on the events page
 
@@ -29,9 +34,13 @@
     if (Array.isArray(stored) && stored.length > 0) {
       events = stored;
     } else {
-      // Object.assign copies each seed event, so editing one later cannot
-      // change the original SEED_EVENTS array.
-      events = SEED_EVENTS.map(function (e) { return Object.assign({}, e); });
+      // Copy each seed event so editing one later cannot change the
+      // original SEED_EVENTS array. Objects are held by reference, so
+      // without the copy both lists would point at the same objects.
+      events = [];
+      for (let i = 0; i < SEED_EVENTS.length; i++) {
+        events.push(Object.assign({}, SEED_EVENTS[i]));
+      }
     }
   }
 
@@ -99,12 +108,84 @@
     return item;
   }
 
+  /* ----------------------------------------------------------------------
+     SEARCH, FILTER AND SORT
+     ---------------------------------------------------------------------- */
+
+  /** The events matching the current search box and category dropdown. */
+  function getVisibleEvents() {
+    const term     = searchInput.value.trim().toLowerCase();
+    const category = categorySelect.value;
+
+    // Build a NEW array of matching events rather than removing from
+    // `events`, so a search never alters the full list.
+    const result = [];
+
+    for (let i = 0; i < events.length; i++) {
+      const e = events[i];
+
+      // "all" matches every category; otherwise it must match exactly.
+      const categoryMatches = (category === 'all') || (e.category === category);
+
+      // An empty search box matches everything. Otherwise look for the term
+      // in the fields a student would reasonably search by.
+      const haystack = (e.title + ' ' + e.description + ' ' + e.course + ' ' +
+                        e.location + ' ' + e.notes).toLowerCase();
+      const keywordMatches = (term === '') || haystack.indexOf(term) !== -1;
+
+      if (categoryMatches && keywordMatches) {
+        result.push(e);
+      }
+    }
+
+    const order = sortSelect.value;
+    result.sort(function (a, b) {
+      // localeCompare returns negative, zero or positive - exactly what
+      // .sort() needs - and orders letters the way a reader expects.
+      if (order === 'title') return a.title.localeCompare(b.title);
+
+      // Dates are stored as YYYY-MM-DD, a format where sorting the text
+      // alphabetically gives the same answer as sorting by date, because the
+      // most significant part comes first and every part is zero-padded.
+      const left  = a.date + 'T' + a.time;
+      const right = b.date + 'T' + b.time;
+      return (order === 'latest') ? right.localeCompare(left)
+                                  : left.localeCompare(right);
+    });
+
+    return result;
+  }
+
   /** Redraw the list from the current state. */
   function render() {
+    const visible = getVisibleEvents();
+
     // Setting textContent to an empty string removes every child element,
     // which clears the list before it is drawn again.
     listEl.textContent = '';
-    events.forEach(function (ev) { listEl.appendChild(buildEventNode(ev)); });
+    for (let i = 0; i < visible.length; i++) {
+      listEl.appendChild(buildEventNode(visible[i]));
+    }
+
+    countEl.textContent = 'Showing ' + visible.length + ' of ' + events.length +
+                          ' event' + (events.length === 1 ? '' : 's') + '.';
+    emptyEl.hidden = (visible.length > 0);
+  }
+
+  /* ----------------------------------------------------------------------
+     WIRING UP AND STARTING
+     ---------------------------------------------------------------------- */
+
+  // 'input' fires on every keystroke, so the list filters as you type.
+  searchInput.addEventListener('input', render);
+  categorySelect.addEventListener('change', render);
+  sortSelect.addEventListener('change', render);
+
+  /* Fill the category dropdown from the single list in data.js, so the
+     filter can never disagree with the categories the data actually uses. */
+  for (let i = 0; i < EVENT_CATEGORIES.length; i++) {
+    const name = EVENT_CATEGORIES[i];
+    categorySelect.appendChild(new Option(name, name));
   }
 
   loadEvents();

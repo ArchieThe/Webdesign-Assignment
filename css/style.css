@@ -284,3 +284,23 @@ textarea:focus-visible {
 /* The recommended badge is a different colour — this is the visual status
    change the assignment brief asks for. */
 .badge-recommended { background: var(--amber); color: #fff; }
+
+/* Toolbar (search + filter) */
+.toolbar {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 0.75rem;
+  align-items: end;
+  margin-bottom: 1.25rem;
+}
+.toolbar .field { margin-bottom: 0; }
+
+
+.empty-state {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: var(--text-muted);
+  background: #fff;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+}

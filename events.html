@@ -35,6 +35,36 @@
 
     <div id="app-panel">
 
+      <!-- ===== Search, filter and sort ================================ -->
+      <section aria-labelledby="browse-heading">
+        <h2 id="browse-heading">Browse events</h2>
+
+        <div class="toolbar">
+          <div class="field">
+            <label for="search-input">Search by keyword</label>
+            <input type="search" id="search-input"
+                   placeholder="e.g. workshop, git, soccer">
+          </div>
+          <div class="field">
+            <label for="category-filter">Category</label>
+            <!-- The category options are added by js/events.js -->
+            <select id="category-filter">
+              <option value="all">All categories</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="sort-order">Sort by</label>
+            <select id="sort-order">
+              <option value="soonest">Date — soonest first</option>
+              <option value="latest">Date — latest first</option>
+              <option value="title">Title — A to Z</option>
+            </select>
+          </div>
+        </div>
+
+        <p id="result-count" class="result-count" aria-live="polite"></p>
+      </section>
+
       <!-- All events -->
       <section aria-labelledby="all-heading">
         <h2 id="all-heading">All Events</h2>
