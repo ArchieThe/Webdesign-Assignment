@@ -1,8 +1,8 @@
 /* ==========================================================================
    events.js — the campus events directory
    --------------------------------------------------------------------------
-   Stage 4: the four operations the assignment asks for - create, view,
-   update and delete - plus searching, filtering and input validation.
+   Create, view, update and delete events, plus searching, filtering,
+   input validation and recommendations.
 
    Wrapped in an IIFE (Immediately Invoked Function Expression) so that the
    names declared inside stay private to this file instead of becoming global
@@ -20,6 +20,8 @@
   let editingId = null;
 
   const listEl         = document.getElementById('event-list');
+  const recommendedEl   = document.getElementById('recommended-list');
+  const recommendedWrap = document.getElementById('recommended-section');
   const countEl        = document.getElementById('result-count');
   const emptyEl        = document.getElementById('empty-state');
   const searchInput    = document.getElementById('search-input');
@@ -389,7 +391,7 @@
 
   /** Build the list item for one event. */
   function buildEventNode(ev) {
-    const item = el('li', 'event');
+    const item = el('li', 'event' + (ev.recommended ? ' is-recommended' : ''));
 
     const head = el('div', 'event-head');
     const titleWrap = el('div');
@@ -401,6 +403,11 @@
     badges.appendChild(el('span', 'badge badge-category', ev.category));
     badges.appendChild(document.createTextNode(' '));
     badges.appendChild(el('span', 'badge badge-mode', ev.mode));
+    if (ev.recommended) {
+      badges.appendChild(document.createTextNode(' '));
+      // The badge colour change is the visual status update the brief asks for.
+      badges.appendChild(el('span', 'badge badge-recommended', '\u2605 Recommended'));
+    }
     head.appendChild(badges);
     item.appendChild(head);
 
@@ -422,6 +429,12 @@
     // --- buttons ---
     const actions = el('div', 'event-actions');
 
+    const recBtn = el('button', 'btn btn-small btn-secondary',
+      ev.recommended ? '\u2605 Remove recommendation' : '\u2606 Recommend');
+    recBtn.type = 'button';
+    recBtn.setAttribute('aria-pressed', String(ev.recommended));
+    recBtn.addEventListener('click', function () { toggleRecommend(ev.id); });
+
     const editBtn = el('button', 'btn btn-small btn-secondary', 'Edit');
     editBtn.type = 'button';
     editBtn.addEventListener('click', function () { startEdit(ev.id); });
@@ -430,11 +443,25 @@
     delBtn.type = 'button';
     delBtn.addEventListener('click', function () { deleteEvent(ev.id); });
 
+    actions.appendChild(recBtn);
     actions.appendChild(editBtn);
     actions.appendChild(delBtn);
     item.appendChild(actions);
 
     return item;
+  }
+
+  /* ----------------------------------------------------------------------
+     RECOMMENDED STATUS
+     ---------------------------------------------------------------------- */
+
+  function toggleRecommend(id) {
+    const target = findEvent(id);
+    if (!target) return;
+
+    target.recommended = !target.recommended;   // flip true/false
+    saveEvents();
+    render();
   }
 
   /* ----------------------------------------------------------------------
@@ -495,6 +522,18 @@
     for (let i = 0; i < visible.length; i++) {
       listEl.appendChild(buildEventNode(visible[i]));
     }
+
+    // The Recommended section is drawn from the same filtered list, so the
+    // two views can never disagree about which events are recommended.
+    recommendedEl.textContent = '';
+    let recommendedCount = 0;
+    for (let i = 0; i < visible.length; i++) {
+      if (visible[i].recommended) {
+        recommendedEl.appendChild(buildEventNode(visible[i]));
+        recommendedCount++;
+      }
+    }
+    recommendedWrap.hidden = (recommendedCount === 0);
 
     countEl.textContent = 'Showing ' + visible.length + ' of ' + events.length +
                           ' event' + (events.length === 1 ? '' : 's') + '.';
