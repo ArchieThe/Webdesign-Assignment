@@ -75,6 +75,93 @@
         </p>
       </section>
 
+      <!-- Create event form -->
+      <section aria-labelledby="form-heading">
+        <h2 id="form-heading">Create a new event</h2>
+
+        <div class="card">
+          <!-- role="status" announces the success or error message -->
+          <p id="form-status" class="status" role="status" hidden></p>
+
+          <!-- novalidate turns off the browser's own pop-up messages so that
+               our own validation in js/events.js is the single source of
+               truth and the error text is consistent in every browser. -->
+          <form id="event-form" novalidate>
+
+            <div class="field">
+              <label for="field-title">Event title</label>
+              <input type="text" id="field-title" name="title"
+                     placeholder="e.g. Finish Your Semester Well - SCSIT Workshop">
+              <span class="error-text" id="error-title"></span>
+            </div>
+
+            <div class="field">
+              <label for="field-course">Course or program <span class="optional">(optional)</span></label>
+              <input type="text" id="field-course" name="course"
+                     placeholder="e.g. INFO 1012 Information Technology Systems">
+              <span class="error-text" id="error-course"></span>
+            </div>
+
+            <div class="grid-2">
+              <div class="field">
+                <label for="field-category">Category</label>
+                <select id="field-category" name="category">
+                  <option value="">Choose a category…</option>
+                </select>
+                <span class="error-text" id="error-category"></span>
+              </div>
+
+              <div class="field">
+                <label for="field-mode">Mode</label>
+                <select id="field-mode" name="mode">
+                  <option value="">Choose a mode…</option>
+                </select>
+                <span class="error-text" id="error-mode"></span>
+              </div>
+            </div>
+
+            <div class="grid-2">
+              <div class="field">
+                <label for="field-date">Date</label>
+                <input type="date" id="field-date" name="date">
+                <span class="error-text" id="error-date"></span>
+              </div>
+
+              <div class="field">
+                <label for="field-time">Start time</label>
+                <input type="time" id="field-time" name="time">
+                <span class="error-text" id="error-time"></span>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="field-location">Location</label>
+              <input type="text" id="field-location" name="location"
+                     placeholder="e.g. City East Campus, Barr Smith South 2052">
+              <span class="error-text" id="error-location"></span>
+            </div>
+
+            <div class="field">
+              <label for="field-description">Description</label>
+              <textarea id="field-description" name="description" rows="4"
+                        placeholder="What happens at this event, and who is it for?"></textarea>
+              <span class="error-text" id="error-description"></span>
+            </div>
+
+            <div class="field">
+              <label for="field-notes">Additional notes <span class="optional">(optional)</span></label>
+              <textarea id="field-notes" name="notes" rows="2"
+                        placeholder="e.g. RSVP required, bring a laptop, catering provided"></textarea>
+              <span class="error-text" id="error-notes"></span>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" id="form-submit" class="btn">Add event</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
     </div><!-- /#app-panel -->
   </main>
 

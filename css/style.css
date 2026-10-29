@@ -304,3 +304,58 @@ textarea:focus-visible {
   border: 1px dashed var(--border);
   border-radius: var(--radius);
 }
+
+/* Forms */
+.field { margin-bottom: 1rem; }
+.field label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.92rem;
+  margin-bottom: 0.3rem;
+}
+.field .optional { font-weight: 400; color: var(--text-muted); }
+
+input[type="text"],
+input[type="date"],
+input[type="time"],
+input[type="password"],
+input[type="search"],
+select,
+textarea {
+  width: 100%;
+  font: inherit;
+  padding: 0.5rem 0.65rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--text);
+}
+textarea { resize: vertical; min-height: 5rem; }
+
+/* .invalid is added by JavaScript when validation fails */
+.field input.invalid,
+.field select.invalid,
+.field textarea.invalid { border-color: var(--red); background: #fdf3f2; }
+
+.error-text {
+  display: block;
+  color: var(--red);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-top: 0.25rem;
+  min-height: 1.2em;   /* reserve the space so the form doesn't jump */
+}
+
+.form-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; }
+
+/* Status messages */
+.status {
+  padding: 0.7rem 1rem;
+  border-radius: 6px;
+  border-left: 4px solid;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+.status-success { background: #eaf5ee; border-color: var(--green); color: #14512f; }
+.status-error   { background: #fdf0ef; border-color: var(--red);   color: #7d1a15; }
+.status[hidden] { display: none; }

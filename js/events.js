@@ -1,7 +1,8 @@
 /* ==========================================================================
    events.js — the campus events directory
    --------------------------------------------------------------------------
-   Stage 2: display the events, and let the user search, filter and sort them.
+   Stage 3: display, search, filter and sort events, and create new ones
+   through a validated form.
 
    Wrapped in an IIFE (Immediately Invoked Function Expression) so that the
    names declared inside stay private to this file instead of becoming global
@@ -22,7 +23,25 @@
   const categorySelect = document.getElementById('category-filter');
   const sortSelect     = document.getElementById('sort-order');
 
-  if (!listEl) return;   // not on the events page
+  const form        = document.getElementById('event-form');
+  const statusBox   = document.getElementById('form-status');
+
+  if (!listEl || !form) return;   // not on the events page
+
+  /* The fields the form collects, with the rules each must satisfy. Keeping
+     the rules as data rather than a long if/else chain means adding a field
+     later is a one-line change. */
+  const FIELDS = [
+    { name: 'title',       label: 'Event title',       required: true,  minLength: 3 },
+    { name: 'course',      label: 'Course or program', required: false },
+    { name: 'category',    label: 'Category',          required: true },
+    { name: 'date',        label: 'Date',              required: true,  type: 'date' },
+    { name: 'time',        label: 'Start time',        required: true,  type: 'time' },
+    { name: 'mode',        label: 'Mode',              required: true },
+    { name: 'location',    label: 'Location',          required: true,  minLength: 3 },
+    { name: 'description', label: 'Description',       required: true,  minLength: 10 },
+    { name: 'notes',       label: 'Additional notes',  required: false }
+  ];
 
   /**
    * Load the events. Anything saved previously is kept in localStorage; if
@@ -43,6 +62,189 @@
       }
     }
   }
+
+  /** Write the current list back to localStorage. */
+  function saveEvents() {
+    storageSet(localStorage, STORAGE_KEY, events);
+  }
+
+  /** Produce an id no existing event is using. */
+  function nextId() {
+    return 'evt-' + Date.now() + '-' + Math.floor(Math.random() * 1000);
+  }
+
+  /* ----------------------------------------------------------------------
+     VALIDATION
+     ---------------------------------------------------------------------- */
+
+  /**
+   * Is this a real calendar date in YYYY-MM-DD form?
+   *
+   * The regular expression only checks the SHAPE of the text. "2026-02-30"
+   * has the right shape and does not exist, and JavaScript silently rolls it
+   * forward to 2 March rather than rejecting it. So the real test is to build
+   * the date and check the day, month and year came back unchanged.
+   */
+  function isValidDate(value) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+
+    const parts = value.split('-');
+    const year  = Number(parts[0]);
+    const month = Number(parts[1]);
+    const day   = Number(parts[2]);
+
+    if (year < 1900 || year > 2200) return false;
+
+    const probe = new Date(year, month - 1, day);   // months are 0-based
+    return probe.getFullYear() === year
+        && probe.getMonth() === month - 1
+        && probe.getDate() === day;
+  }
+
+  /** Is this a 24-hour time between 00:00 and 23:59? */
+  function isValidTime(value) {
+    return /^([01]\d|2[0-3]):[0-5]\d$/.test(value);
+  }
+
+  /**
+   * Is this date close enough to today to be a real campus event?
+   * isValidDate rejects dates that do not exist; this rejects dates that
+   * exist but cannot be what the user meant - usually a mistyped year.
+   */
+  const YEARS_ALLOWED = 5;
+
+  function isWithinAllowedRange(value) {
+    const parts = value.split('-');
+    const entered = new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
+
+    const earliest = new Date();
+    earliest.setFullYear(earliest.getFullYear() - YEARS_ALLOWED);
+
+    const latest = new Date();
+    latest.setFullYear(latest.getFullYear() + YEARS_ALLOWED);
+
+    return entered >= earliest && entered <= latest;
+  }
+
+  /**
+   * Check every field and collect the problems.
+   * @returns {Object} field name -> error message. Empty object means valid.
+   */
+  function validate(values) {
+    const errors = {};
+
+    for (let i = 0; i < FIELDS.length; i++) {
+      const field = FIELDS[i];
+      const value = values[field.name];
+
+      if (field.required && value === '') {
+        errors[field.name] = field.label + ' is required.';
+        continue;
+      }
+
+      if (value !== '' && field.minLength && value.length < field.minLength) {
+        errors[field.name] = field.label + ' must be at least ' +
+                             field.minLength + ' characters.';
+        continue;
+      }
+
+      if (field.type === 'date' && value !== '') {
+        if (!isValidDate(value)) {
+          errors[field.name] = 'Enter a real date in the format YYYY-MM-DD. ' +
+                               'Dates such as 30 February do not exist.';
+          continue;
+        }
+        if (!isWithinAllowedRange(value)) {
+          errors[field.name] = 'That date is more than ' + YEARS_ALLOWED +
+                               ' years away. Please check the year.';
+          continue;
+        }
+      }
+
+      if (field.type === 'time' && value !== '' && !isValidTime(value)) {
+        errors[field.name] = 'Enter a valid 24-hour time, for example 14:30.';
+      }
+    }
+
+    return errors;
+  }
+
+  /** Read every field out of the form and trim stray spaces. */
+  function readForm() {
+    const values = {};
+    for (let i = 0; i < FIELDS.length; i++) {
+      const input = document.getElementById('field-' + FIELDS[i].name);
+      values[FIELDS[i].name] = input ? input.value.trim() : '';
+    }
+    return values;
+  }
+
+  /** Put the error messages on screen beside the fields that failed. */
+  function showErrors(errors) {
+    let firstBadField = null;
+
+    for (let i = 0; i < FIELDS.length; i++) {
+      const field   = FIELDS[i];
+      const input   = document.getElementById('field-' + field.name);
+      const slot    = document.getElementById('error-' + field.name);
+      const message = errors[field.name];
+
+      if (message) {
+        input.classList.add('invalid');
+        input.setAttribute('aria-invalid', 'true');   // announced by screen readers
+        slot.textContent = message;
+        if (!firstBadField) firstBadField = input;
+      } else {
+        input.classList.remove('invalid');
+        input.removeAttribute('aria-invalid');
+        slot.textContent = '';
+      }
+    }
+
+    if (firstBadField) firstBadField.focus();
+  }
+
+  /** Show a success or failure message above the form. */
+  function showStatus(message, kind) {
+    statusBox.textContent = message;
+    statusBox.className = 'status status-' + kind;
+    statusBox.hidden = false;
+  }
+
+  /* ----------------------------------------------------------------------
+     CREATE
+     ---------------------------------------------------------------------- */
+
+  form.addEventListener('submit', function (event) {
+    /* A form's default action is to submit to its `action` address and load
+       the result. This form has no action, so the browser would reload this
+       page and throw away everything the script just did. preventDefault
+       cancels that, and it is FIRST deliberately - after the validation check
+       an early return would skip it. */
+    event.preventDefault();
+
+    const values = readForm();
+    const errors = validate(values);
+
+    // Object.keys turns {title: "..."} into ["title"], so its length counts
+    // how many fields failed.
+    if (Object.keys(errors).length > 0) {
+      showErrors(errors);
+      showStatus('Please correct the ' + Object.keys(errors).length +
+                 ' highlighted field(s) below.', 'error');
+      return;
+    }
+
+    showErrors({});   // clear messages left from a previous attempt
+
+    values.id = nextId();
+    events.push(values);
+    showStatus('Event "' + values.title + '" was added.', 'success');
+
+    saveEvents();
+    form.reset();
+    render();
+  });
 
   /** Turn "2026-10-07" and "10:00" into "Wednesday, 7 October 2026 at 10:00 am". */
   function formatWhen(dateText, timeText) {
@@ -186,6 +388,12 @@
   for (let i = 0; i < EVENT_CATEGORIES.length; i++) {
     const name = EVENT_CATEGORIES[i];
     categorySelect.appendChild(new Option(name, name));
+    document.getElementById('field-category').appendChild(new Option(name, name));
+  }
+
+  for (let i = 0; i < EVENT_MODES.length; i++) {
+    const name = EVENT_MODES[i];
+    document.getElementById('field-mode').appendChild(new Option(name, name));
   }
 
   loadEvents();
