@@ -1,8 +1,8 @@
 /* ==========================================================================
    events.js — the campus events directory
    --------------------------------------------------------------------------
-   Stage 3: display, search, filter and sort events, and create new ones
-   through a validated form.
+   Stage 4: the four operations the assignment asks for - create, view,
+   update and delete - plus searching, filtering and input validation.
 
    Wrapped in an IIFE (Immediately Invoked Function Expression) so that the
    names declared inside stay private to this file instead of becoming global
@@ -16,6 +16,9 @@
   /** The working list of events, held in memory while the page is open. */
   let events = [];
 
+  /** null when the form is creating a new event; otherwise the id being edited. */
+  let editingId = null;
+
   const listEl         = document.getElementById('event-list');
   const countEl        = document.getElementById('result-count');
   const emptyEl        = document.getElementById('empty-state');
@@ -24,6 +27,9 @@
   const sortSelect     = document.getElementById('sort-order');
 
   const form        = document.getElementById('event-form');
+  const formHeading = document.getElementById('form-heading');
+  const submitBtn   = document.getElementById('form-submit');
+  const cancelBtn   = document.getElementById('form-cancel');
   const statusBox   = document.getElementById('form-status');
 
   if (!listEl || !form) return;   // not on the events page
@@ -211,8 +217,12 @@
     statusBox.hidden = false;
   }
 
+  function hideStatus() {
+    statusBox.hidden = true;
+  }
+
   /* ----------------------------------------------------------------------
-     CREATE
+     CREATE AND UPDATE
      ---------------------------------------------------------------------- */
 
   form.addEventListener('submit', function (event) {
@@ -237,14 +247,116 @@
 
     showErrors({});   // clear messages left from a previous attempt
 
-    values.id = nextId();
-    events.push(values);
-    showStatus('Event "' + values.title + '" was added.', 'success');
+    if (editingId === null) {
+      // ---- CREATE -------------------------------------------------------
+      values.id = nextId();
+      events.push(values);
+      showStatus('Event "' + values.title + '" was added.', 'success');
+    } else {
+      // ---- UPDATE -------------------------------------------------------
+      // Find the POSITION of the event being edited so it can be replaced
+      // in place. A plain loop with an index is all this needs.
+      let index = -1;
+      for (let i = 0; i < events.length; i++) {
+        if (events[i].id === editingId) { index = i; break; }
+      }
+
+      if (index === -1) {
+        showStatus('That event no longer exists and could not be updated.', 'error');
+        cancelEdit();
+        return;
+      }
+
+      values.id = editingId;        // keep the id; replace everything else
+      events[index] = values;
+      showStatus('Event "' + values.title + '" was updated.', 'success');
+      cancelEdit();
+    }
 
     saveEvents();
     form.reset();
     render();
   });
+
+  /** Find one event by its id, or return null. */
+  function findEvent(id) {
+    for (let i = 0; i < events.length; i++) {
+      if (events[i].id === id) return events[i];
+    }
+    return null;
+  }
+
+  /** Load an existing event into the form so it can be changed. */
+  function startEdit(id) {
+    const target = findEvent(id);
+    if (!target) return;
+
+    editingId = id;
+
+    for (let i = 0; i < FIELDS.length; i++) {
+      const input = document.getElementById('field-' + FIELDS[i].name);
+      if (input) input.value = target[FIELDS[i].name] || '';
+    }
+
+    showErrors({});
+    formHeading.textContent = 'Update event';
+    submitBtn.textContent = 'Save changes';
+    cancelBtn.hidden = false;
+    hideStatus();
+
+    // On a phone the form sits well below the list, so bring it into view.
+    form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.getElementById('field-title').focus();
+  }
+
+  /** Leave edit mode and go back to creating a new event. */
+  function cancelEdit() {
+    editingId = null;
+    form.reset();
+    showErrors({});
+    formHeading.textContent = 'Create a new event';
+    submitBtn.textContent = 'Add event';
+    cancelBtn.hidden = true;
+  }
+
+  cancelBtn.addEventListener('click', function () {
+    cancelEdit();
+    hideStatus();
+  });
+
+  /* ----------------------------------------------------------------------
+     DELETE
+     The brief requires a confirmation dialog before anything is deleted.
+     ---------------------------------------------------------------------- */
+
+  function deleteEvent(id) {
+    const target = findEvent(id);
+    if (!target) return;
+
+    /* window.confirm shows the browser's own OK/Cancel dialog and returns
+       true only if OK was chosen. The message names the event and says the
+       action cannot be undone, rather than a vague "Are you sure?" - a
+       confirmation nobody reads protects nobody. */
+    const confirmed = window.confirm(
+      'Delete "' + target.title + '"?\n\nThis cannot be undone.'
+    );
+
+    if (!confirmed) return;
+
+    // Build a new list without the deleted event. Removing from the array
+    // while looping over it would shift every later index down by one.
+    const kept = [];
+    for (let i = 0; i < events.length; i++) {
+      if (events[i].id !== id) kept.push(events[i]);
+    }
+    events = kept;
+
+    if (editingId === id) cancelEdit();   // was it the one being edited?
+
+    saveEvents();
+    showStatus('Event "' + target.title + '" was deleted.', 'success');
+    render();
+  }
 
   /** Turn "2026-10-07" and "10:00" into "Wednesday, 7 October 2026 at 10:00 am". */
   function formatWhen(dateText, timeText) {
@@ -306,6 +418,21 @@
 
     item.appendChild(el('p', 'event-desc', ev.description));
     if (ev.notes) item.appendChild(el('p', 'event-notes', 'Notes: ' + ev.notes));
+
+    // --- buttons ---
+    const actions = el('div', 'event-actions');
+
+    const editBtn = el('button', 'btn btn-small btn-secondary', 'Edit');
+    editBtn.type = 'button';
+    editBtn.addEventListener('click', function () { startEdit(ev.id); });
+
+    const delBtn = el('button', 'btn btn-small btn-danger', 'Delete');
+    delBtn.type = 'button';
+    delBtn.addEventListener('click', function () { deleteEvent(ev.id); });
+
+    actions.appendChild(editBtn);
+    actions.appendChild(delBtn);
+    item.appendChild(actions);
 
     return item;
   }
