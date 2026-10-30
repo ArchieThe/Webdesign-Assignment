@@ -33,7 +33,43 @@
 
   <main class="container">
 
-    <div id="app-panel">
+    <!-- Login panel - js/auth.js swaps this with the app panel -->
+    <section id="login-panel" class="login-panel" aria-labelledby="login-heading">
+      <div class="card">
+        <h2 id="login-heading">Sign in</h2>
+        <p>This page is restricted to student representatives and event
+           administrators.</p>
+
+        <!-- role="alert" makes a screen reader announce the failure immediately -->
+        <p id="login-error" class="status status-error" role="alert" hidden></p>
+
+        <form id="login-form" novalidate>
+          <div class="field">
+            <label for="login-username">Username</label>
+            <input type="text" id="login-username" name="username"
+                   autocomplete="username" required>
+          </div>
+          <div class="field">
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" name="password"
+                   autocomplete="current-password" required>
+          </div>
+          <button type="submit" class="btn">Sign in</button>
+        </form>
+
+        <p class="login-hint">
+          <strong>Marker access:</strong> username <code>admin</code>,
+          password <code>INFO1012</code>.
+        </p>
+      </div>
+    </section>
+
+    <div id="app-panel" hidden>
+
+      <div class="login-bar">
+        <span>Signed in as <strong id="session-user"></strong></span>
+        <button type="button" id="logout-btn" class="btn btn-small btn-secondary">Sign out</button>
+      </div>
 
       <!-- ===== Search, filter and sort ================================ -->
       <section aria-labelledby="browse-heading">
@@ -183,6 +219,7 @@
   <script src="js/storage.js"></script>
   <script src="js/data.js"></script>
   <script src="js/clock.js"></script>
+  <script src="js/auth.js"></script>
   <script src="js/events.js"></script>
 </body>
 </html>
