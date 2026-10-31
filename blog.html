@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Development log for Adelaide Campus Events: Agile project plan and a record of errors encountered and resolved.">
+  <title>Adelaide Campus Events — Troubleshooting Blog</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Site header and navigation -->
+  <header class="site-header">
+    <div class="container">
+      <a class="site-title" href="index.html">Adelaide Campus Events</a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="events.html">Events Directory</a></li>
+          <li><a href="blog.html" aria-current="page">Troubleshooting Blog</a></li>
+          <li><a href="ethics.html">Ethics &amp; Privacy</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="banner">
+    <div class="container">
+      <h1>Troubleshooting Blog</h1>
+      <p>How this application was planned using Agile practices, and a record of
+         two errors encountered while building it and how each was resolved.</p>
+    </div>
+  </div>
+
+  <main class="container">
+
+    <!-- Part 1: Agile -->
+    <section aria-labelledby="agile-heading">
+      <h2 id="agile-heading">Part 1 — Agile methodology and this project</h2>
+
+      <div class="card">
+        <h3>What Agile is</h3>
+        <p>Before 2001, most software was built using a <strong>waterfall</strong>
+           process: requirements, design, implementation and testing happened in one
+           direction, and each phase finished before the next began. This is well a 
+           reliable but a slow method to use.</p>
+        <p>In February 2001 software practitioners published the
+           <strong>Agile Manifesto</strong>, which sets out four value statements.
+           Each is a comparison rather than a rule — the authors were explicit that
+           the items on the right still have value, the items on the left simply have
+           more:</p>
+        <ul>
+          <li><strong>Individuals and interactions</strong> over processes and tools</li>
+          <li><strong>Working software</strong> over comprehensive documentation</li>
+          <li><strong>Customer collaboration</strong> over contract negotiation</li>
+          <li><strong>Responding to change</strong> over following a plan</li>
+        </ul>
+        <p>In practice, Agile teams work in short fixed length cycles called
+           <strong>sprints</strong>, producing something that runs. Work
+           is kept in a prioritised <strong>backlog</strong>, and the team reviews both
+           the product and its the process at the end of every sprint.</p>
+
+        <h3>Which parts of Agile I adopted</h3>
+        <p>Agile is designed for teams, and this is an individual assessment. Some
+           practices transfer to a solo project and some do not. These are the ones 
+           I thought was worth using:</p>
+        <ul>
+          <li><strong>Working software with documentation — adopted.</strong>
+              My first commit was an unstyled HTML page with nothing but a heading
+              and navigation. It was not much compared to what it was supposed to be but 
+              it ran. Every very later feature was added to something that already existed 
+              and worked 
+             </li>
+          <li><strong>Short iterations with a working build at the end — adopted.</strong>
+              I split the work into small steps, each ending with a version I could
+              open in a browser and a commit in version control.</li>
+          <li><strong>Responding to change over following a plan — adopted.</strong>
+              My original plan had the login built first, since I assumed it was the hardest
+              part. Once I started it was clear that the event list was something that most
+              important to the application and the login was just an addon, so I changed my plans
+             </li>
+          <li><strong>A prioritised backlog — adopted.</strong> I worked from a list
+              ordered by what the brief marks, not by what I found most interesting.
+              This is why input validation was finished before the image gallery, even
+              though the gallery is more visible.</li>
+          <li><strong>Test-as-you-go — adopted.</strong> Rather than testing at the end,
+              I checked each feature in the browser as soon as it was written. Both of
+              the errors documented below were found within minutes of the code that
+              caused them, which is why each took under an hour to resolve.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Part 2: sprint plan -->
+    <section aria-labelledby="plan-heading">
+      <h2 id="plan-heading">Part 2 — Three-week sprint plan</h2>
+
+      <p>The table below is the plan I worked to (even if it wasn't always followed -_-). It sets out what
+         each sprint was for, and what had to be needed to be done before the sprint is done. The commit history in
+         the repository is the record of the work itself.</p>
+
+      <div class="table-wrap">
+        <table>
+          <caption>Planned three-sprint schedule for Adelaide Campus Events, with the
+                   role played in each phase.</caption>
+          <thead>
+            <tr>
+              <th scope="col">Phase</th>
+              <th scope="col">Sprint 1 &mdash; Week 1</th>
+              <th scope="col">Sprint 2 &mdash; Week 2</th>
+              <th scope="col">Sprint 3 &mdash; Week 3</th>
+              <th scope="col">Role played</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Planning</th>
+              <td>Read the brief and turn every requirement into a to do list.
+                  Order it by marks.</td>
+              <td>Review sprint 1 against the brief. Sprint goal: the four event
+                  operations working end to end.</td>
+              <td>Review what is left in the to do list. Sprint goal: the two
+                  written pages complete and the whole site submitted.</td>
+              <td>Deciding what is worth doing first.</td>
+            </tr>
+            <tr>
+              <th scope="row">Analysis</th>
+              <td>Work out what fields an event actually needs by looking at a real
+                  campus event examples. Pick the five categories.</td>
+              <td>Decide what counts as an invalid input for each field, including dates</td>
+              <td>Analyse which features of the finished application carry an ethics or
+                  privacy consequence worth writing about.</td>
+              <td>turning descriptions into requirements.</td>
+            </tr>
+            <tr>
+              <th scope="row">Design</th>
+              <td>Start the four pages and the shared header, navigation and footer.
+                  Choose the colour palette and set it up as CSS custom properties</td>
+              <td>Design the form for creating and updating events.</td>
+              <td>Design the layout of the blog and ethics pages, including how code
+                  snippets and screenshots are presented.</td>
+              <td>Deciding structure and appearance.</td>
+            </tr>
+            <tr>
+              <th scope="row">Implementation</th>
+              <td>Build <code>index.html</code>, the shared stylesheet, with the seed data in
+                  <code>data.js</code>, the image gallery and the footer clock.</td>
+              <td>Build <code>events.html</code>: the login gate, create, view, update,
+                  delete with confirmation, validation, search, category filter, sort
+                  and the recommended section.</td>
+              <td>Write <code>blog.html</code> and <code>ethics.html</code>. Edit
+                  the About Me section.</td>
+              <td>Actuallywriting the HTML, CSS and JavaScript.</td>
+            </tr>
+            <tr>
+              <th scope="row">Testing and Maintenance</th>
+              <td>Check the gallery cycles past the last image and back to the first.
+                  Confirm the pages work. </td>
+              <td>Test each validation rule with deliberately bad input. Confirm the
+                  delete confirmation can be cancelled. <strong>Testing alongside
+                  implementation, rather than after it, is what surfaced both of the
+                  errors documented below.</strong></td>
+              <td>Re-read the brief line by line against the finished site. Check the
+                  layout at phone width. Confirm every navigation link resolves. Commit
+                  and push to GitHub, then export the ZIP.</td>
+              <td>Try to break what I was built.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Part 3: error log -->
+    <section aria-labelledby="errors-heading">
+      <h2 id="errors-heading">Part 3 — Errors encountered and resolved</h2>
+
+
+      <!-- ERROR 1 -->
+      <article class="log-entry">
+        <h3>Error 1 — Submitting the create-event form reloaded the page</h3>
+
+        <div class="log-meta">
+          <span>Encountered: <time>Saturday 30 October 2026, 8:45 AM</time></span>
+          <span>Resolved: <time>Saturday 30 October 2026, 9:20 AM</time></span>
+          <span>Component: <code>js/events.js</code> — create event</span>
+        </div>
+
+        <h4>What happened</h4>
+        <p>Filling in the create-event form and pressing <em>Add event</em> made the
+           whole page flash and reload. The form came back empty with its placeholder
+           text showing, and the green confirmation message never appeared. The address
+           bar changed from <code>events.html</code> to a long URL </p>
+        <p>Nothing appeared in the browser console, which made it harder to find.
+           Nothing had crashed, so there was no error message to read. The event itself
+           <em>was</em> still saved, because the application writes to
+           <code>localStorage</code> before the browser navigates, so on an application
+           without persistent storage the new event would have been lost entirely.</p>
+
+        <h4>Screenshot: the form before submitting</h4>
+        <img class="screenshot" src="images/screenshots/BeforePressingSubmit.png"
+             alt="The create-event form filled in with a test event, with a clean events.html URL in the address bar">
+
+        <h4>Screenshot of the error</h4>
+        <img class="screenshot" src="images/screenshots/afterPressingSubmit.png"
+             alt="After pressing Add event: the page has reloaded, the form is empty with placeholder text, and the address bar now contains the form fields as a query string">
+        <p>The address bar reads
+           <code>events.html?title=Test+event&amp;course=Just+a+test+for+submitting+an+event&amp;category=Cultural&amp;mode=Online&amp;date=2026-11-19&amp;time=…</code> </p>
+
+        <h4>The code that caused it</h4>
+        <pre><code>// js/events.js — the submit handler, before the fix
+form.addEventListener('submit', function (event) {
+
+    // event.preventDefault();   &lt;-- missing
+
+    const values = readForm();
+    const errors = validate(values);
+
+    if (Object.keys(errors).length &gt; 0) {
+        showErrors(errors);
+        return;
+    }
+
+    values.id = nextId();
+    events.push(values);      // the event IS added here...
+    saveEvents();
+    render();                 // page reloads
+});</code></pre>
+
+        <h4>Screenshot of the working application</h4>
+        <img class="screenshot" src="images/screenshots/submitBtnFix.png"
+             alt="After the fix: the URL is back to plain events.html and a green message reads Event Test event 2 was added">
+
+        <h4>The corrected code</h4>
+        <pre><code>// js/events.js — the submit handler, after the fix
+form.addEventListener('submit', function (event) {
+
+    event.preventDefault();   // &lt;-- THE FIX: cancel the browser's default submit
+
+    const values = readForm();
+    const errors = validate(values);
+
+    if (Object.keys(errors).length &gt; 0) {
+        showErrors(errors);
+        return;
+    }
+
+    values.id = nextId();
+    events.push(values);
+    saveEvents();
+    render();
+});</code></pre>
+
+        <h4>Troubleshooting explanation</h4>
+        <p><strong>How it was resolved.</strong> Calling
+           <code>event.preventDefault()</code> as the first line of the handler cancels
+           the browser's default behaviour for that event, so the page stays as it is
+           and only my code runs. So I put it first deliberately. </p>
+        <p><strong>Resources used.</strong>
+           <a href="https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault">MDN
+           — <code>Event.preventDefault()</code></a>, and
+           <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/submit_event">MDN
+           — HTMLFormElement: submit event</a>, which states that the default action of
+           a submit event is to send the form and navigate.</p>
+      </article>
+
+      <!-- ERROR 2 -->
+      <article class="log-entry">
+        <h3>Error 2 — The gallery's Previous button failed on the first image</h3>
+
+        <div class="log-meta">
+          <span>Encountered: <time>Saturday 31 October 2026, 11:18 AM</time></span>
+          <span>Resolved: <time>Saturday 31 October 2026, 12:00 PM</time></span>
+          <span>Component: <code>js/home.js</code> — image gallery</span>
+        </div>
+
+        <h4>What happened</h4>
+        <p><em>Next image</em> worked correctly and cycled through all four images.
+           <em>Previous</em> worked too — except on the very first image. Pressing
+           Previous while image 1 was showing did nothing visible: the picture, caption
+           and counter all stayed exactly as they were. The browser console showed
+           <code>Uncaught TypeError: Cannot read properties of undefined (reading
+           'src')</code>, pointing at <code>home.js</code>.</p>
+
+        <h4>Screenshot of the error</h4>
+        <img class="screenshot" src="images/screenshots/nextButtonBroken.png"
+             alt="The gallery still showing Image 1 of 4 after pressing Previous, with four red Uncaught TypeError messages in the browser console pointing at home.js line 53">
+        <p>The counter still reads <strong>Image 1 of 4</strong> and the first dot is
+           still highlighted, confirming the click had no effect. Each press produced
+           another identical error in the console.</p>
+
+        <h4>The code that caused it</h4>
+        <pre><code>// js/home.js — before the fix
+function step(by) {
+    current = (current + by) % GALLERY.length;
+    show(current);
+}
+
+// Next  from image 0:  (0 + 1) % 4  ===  1   correct
+// Prev  from image 0:  (0 - 1) % 4  === -1   GALLERY[-1] is undefined</code></pre>
+
+        <h4>Screenshot of the working application</h4>
+        <img class="screenshot" src="images/screenshots/nextButtonfix.png"
+             alt="After the fix: pressing Previous on image 1 wraps around to Image 4 of 4 and the console is clear">
+
+        <h4>The corrected code</h4>
+        <pre><code>// js/home.js — after the fix
+function step(by) {
+    current = (current + by + GALLERY.length) % GALLERY.length;
+    show(current);
+}
+
+// Prev from image 0:  (0 - 1 + 4) % 4  ===  3   wraps to the last image</code></pre>
+
+        <h4>Troubleshooting explanation</h4>
+
+        <p><strong>How it was resolved.</strong> Adding <code>GALLERY.length</code>
+           before taking the remainder guarantees the left-hand operand is never
+           negative, so the result is always a valid index. Adding a full extra cycle
+           cannot change which image is selected, because a whole lap around the array
+           lands in the same place.</p>
+      </article>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span>Adelaide Campus Events - INFO 1012 Assignment 3</span>
+      <span>Current date and time: <strong><time id="live-clock"></time></strong></span>
+    </div>
+  </footer>
+
+  <script src="js/clock.js"></script>
+</body>
+</html>
