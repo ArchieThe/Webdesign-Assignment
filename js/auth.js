@@ -1,30 +1,15 @@
-/* ==========================================================================
+/*
    auth.js — the login gate on the campus events directory page
    --------------------------------------------------------------------------
-   The brief asks for "a basic login system with at least one username and
-   password to restrict access to this page".
-
-   HONEST LIMITATION — this is worth understanding before the viva.
-   This check runs in the browser, so the username and password below are
-   visible to anyone who opens the page source or the browser's developer
-   tools. It stops a casual visitor from reaching the admin controls; it is
-   NOT real security and could not protect anything valuable.
-
-   Real authentication has to happen on a server, which checks the password
-   against a stored hash (bcrypt or Argon2, never the plain password) and
-   returns a session token. There is no server in this assignment, so this is
-   the honest shape of what a client-only login can be. The ethics and privacy
-   page discusses this trade-off in more detail.
-   ========================================================================== */
+*/
 
 (function () {
   /* The accepted account. Documented in README.md so the marker can log in. */
   const VALID_USERNAME = 'admin';
   const VALID_PASSWORD = 'INFO1012';
 
-  /* sessionStorage, not localStorage: a session ends when the browser tab is
-     closed, so the login does not persist on a shared or library computer.
-     That is a deliberate privacy choice, not an accident. */
+  /* sessionStorage, not localStorage so a session ends when the browser tab is
+     closed, so the login does not persist */
   const SESSION_KEY = 'ace-logged-in';
 
   const loginPanel = document.getElementById('login-panel');
