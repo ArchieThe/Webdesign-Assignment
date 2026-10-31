@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Reflection on ethical data use and data privacy in the Adelaide Campus Events application.">
+  <title>Adelaide Campus Events &mdash; Ethics &amp; Privacy</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <a class="site-title" href="index.html">Adelaide Campus Events</a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="events.html">Events Directory</a></li>
+          <li><a href="blog.html">Troubleshooting Blog</a></li>
+          <li><a href="ethics.html" aria-current="page">Ethics &amp; Privacy</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="banner">
+    <div class="container">
+      <h1>Ethics and Privacy Reflection</h1>
+      <p>The ethical and privacy frameworks covered in this course, applied to the
+         design of this application &mdash; including where it falls short.</p>
+    </div>
+  </div>
+
+  <main class="container">
+
+    <!-- Part 1 - the course frameworks -->
+    <section aria-labelledby="codes-heading">
+      <h2 id="codes-heading">Ethics in a professional IT context</h2>
+      <div class="card">
+        <p>Ethics is the reasoning used to work out what is right and wrong when rules,
+           laws and instinct do not settle the question on their own. It matters
+           particularly in IT because the people affected by a system usually cannot see
+           how it works. A student using this directory cannot tell from the outside
+           whether it records who viewed what, so the decision not to record it is
+           invisible to them and has to be taken on their behalf.</p>
+        <p>That gap between what a system does and what its users can see is why the
+           profession publishes codes. The example given in this course is the
+           <strong>Australian Computer Society</strong>, which maintains both a
+           <strong>Code of Professional Ethics</strong> and a <strong>Code of
+           Professional Conduct</strong>. The first sets out the values an ACS member
+           commits to &mdash; the primacy of the public interest, enhancement of quality
+           of life, honesty, competence, professional development and professionalism
+           &mdash; and the second describes what following those values looks like in
+           practice.</p>
+        <p>The clause that bears hardest on this project is the primacy of the public
+           interest: it ranks the interests of the people affected above personal or
+           sectional ones. The honest-limitations section near the bottom of this page is
+           that clause applied. Describing a client-side login as real security would
+           breach the code more seriously than writing a weak login did in the first
+           place, because the weak login is a constraint of the assignment while the
+           overclaim would be a choice to mislead.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="privacy-concept-heading">
+      <h2 id="privacy-concept-heading">What privacy is</h2>
+      <div class="card">
+        <p>Privacy is commonly viewed as a right to having &ldquo;an inviolate
+           personality&rdquo; (Warren &amp; Brandeis 1890, p.&nbsp;216). The thing being
+           protected is human dignity &mdash; the ability to be free from authoritative
+           control and intrusion &mdash; and that is distinct from the protection of
+           property or of free expression (Floridi 2016; Mill 1885). The argument rests
+           on humans being distinct in that we are &ldquo;endowed with consciousness,
+           intelligence, mental life and self-determination&rdquo; (Floridi 2016).</p>
+        <p>Reiman makes the link to personhood directly: the right to privacy
+           &ldquo;protects the individual&rsquo;s interest in becoming, being and
+           remaining a person&rdquo; (Reiman 1976, p.&nbsp;44). On that reading we should
+           be able to manage the details and the nature of the information communicated
+           about us, which is a matter of confidentiality and of trust in how data is
+           disclosed.</p>
+        <p>Read that way, privacy is not mainly about secrecy. A student advertising a
+           volleyball social is not keeping a secret; they are managing what is
+           communicated about them. A system that quietly widened that communication
+           &mdash; by also recording who read the listing &mdash; would take the
+           management away from them without ever revealing a secret.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="theories-heading">
+      <h2 id="theories-heading">The four privacy theories</h2>
+      <div class="card">
+        <p>The course sets out four theories of privacy, and they disagree about what the
+           right actually protects.</p>
+        <ul>
+          <li><strong>Control theory</strong> links privacy with freedom, on the basis
+              that people should be in control of their own information (Westin 1967).</li>
+          <li><strong>Restricted access theory</strong> is concerned with access to
+              personal data being limited, because data is shared at a pace users cannot
+              control and manage (Moor 1990).</li>
+          <li><strong>Ontological theory</strong> holds that privacy is the friction
+              provided by technologies in the infosphere (Floridi 2006).</li>
+          <li><strong>Contextual integrity</strong> holds that &ldquo;we have a right to
+              privacy, but it is neither a right to control personal information nor a
+              right to have access to this information restricted, but it is a right to
+              appropriate flow of personal information&rdquo;
+              (Nissenbaum 2010, p.&nbsp;127).</li>
+        </ul>
+
+        <h3>Which theory fits this application</h3>
+        <p>An events directory looks harmless. It lists public activities and does not
+           ask anyone for a bank account or a medical record. But knowing which events a
+           student recommends tells you something about their interests, their religion
+           or culture, their political views, their disability, or their sexuality. A
+           directory that recorded who viewed or recommended a Pride society event, a
+           prayer group, or a disability support workshop would be holding genuinely
+           sensitive information about identifiable students, even though every
+           individual event in the list is public.</p>
+        <p><strong>Contextual integrity</strong> is the theory that explains why that is
+           a privacy problem at all. Control theory struggles here, because nobody has
+           lost control of a fact they chose to publish, and restricted access struggles
+           for the same reason, because the information was never restricted. Nissenbaum
+           is the one that fits: a poster for a prayer group on a noticeboard is an
+           appropriate flow in that context, and the same event in a searchable system
+           that also logged who viewed it is an inappropriate flow. The harm is in the
+           change of context, not in the disclosure of a secret.</p>
+        <p>The other three still do work. Restricted access explains the pace problem
+           &mdash; a student who posts one event has no sense of how far a searchable,
+           indexed listing travels compared with a paper poster. Floridi&rsquo;s
+           ontological theory describes what removing the organiser email field actually
+           did: it put friction back into the system deliberately, by making the easy
+           path &mdash; mass-contacting every organiser &mdash; impossible rather than
+           merely discouraged.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="governance-heading">
+      <h2 id="governance-heading">IT governance and its mechanisms</h2>
+      <div class="card">
+        <p>IT governance is a &ldquo;framework for the leadership, organizational
+           structures and business processes, standards and compliance to these
+           standards, which ensure that the organization&rsquo;s IT supports and enables
+           the achievement of its strategies and objectives&rdquo; (Calder 2007), or more
+           briefly, &ldquo;the processes that ensure the effective and efficient use of
+           IT in enabling an organization to achieve its goals&rdquo; (Gartner 2023). It
+           covers four major areas (Ebert et al. 2020, p.&nbsp;13):</p>
+        <ul>
+          <li><strong>Strategic alignment</strong> &mdash; connecting IT with business
+              strategies and operations.</li>
+          <li><strong>Value delivery</strong> &mdash; ensuring the technology generates
+              the expected benefits.</li>
+          <li><strong>Resource management</strong> &mdash; optimising IT investment and
+              managing applications, information, infrastructure and people.</li>
+          <li><strong>Performance measurement</strong> &mdash; monitoring the
+              implementation of the strategy and the performance of the processes
+              adopted.</li>
+        </ul>
+        <p>Established frameworks for doing this include <strong>ITIL</strong> and
+           <strong>COBIT</strong>. Neither is proportionate to a one-person student
+           project, but the function they perform is not optional, and this project has
+           lightweight equivalents of it: the three-week sprint plan on the
+           <a href="blog.html">troubleshooting blog</a> is the strategic alignment and
+           performance measurement, and the git history is the audit record that shows
+           when each decision was actually made.</p>
+
+        <h3>Governance mechanisms</h3>
+        <p>Governance is enforced through three kinds of mechanism.</p>
+        <ul>
+          <li><strong>Codes of ethics</strong> &mdash; the ACS Code of Professional
+              Ethics and Code of Professional Conduct, the ACM Code of Ethics and
+              Professional Conduct, and the IFIP Code of Ethics.</li>
+          <li><strong>Laws</strong> &mdash; on data protection, such as the GDPR and
+              Consumer Data Rights; on privacy, such as the Australian Privacy Principles
+              and the Privacy Act, which is currently undergoing reform; and on
+              intellectual property.</li>
+          <li><strong>Practices</strong> &mdash; for privacy, confidentiality,
+              disclosure, impact risk assessments and notifiable data breaches; for
+              intellectual property, trade marks, patents and design rights; Creative
+              Commons licences and attributions; and security measures.</li>
+        </ul>
+
+        <h3>Which of these this application would answer to</h3>
+        <ul>
+          <li><strong>Australian Privacy Principles.</strong> APP 3 limits collection to
+              what is reasonably necessary; this application satisfies it by collecting
+              no personal data at all. APP 5 requires notice of what is collected and
+              why, and the site has no privacy notice anywhere, so it would
+              <em>fail</em> APP 5 &mdash; which is why a visible privacy notice is first
+              on the list of things I would add. APP 11 requires reasonable security,
+              which the limitations section below addresses honestly.</li>
+          <li><strong>Notifiable data breaches.</strong> The scheme requires an
+              organisation to notify individuals of a breach likely to cause serious
+              harm. Collecting no personal data is what makes this obligation almost
+              empty here: there is nothing held whose loss would need reporting. That is
+              data minimisation paying off twice.</li>
+          <li><strong>GDPR.</strong> It does not apply to a campus assignment, but its
+              requirements for a lawful basis, data minimisation and a right to erasure
+              are the standard the design was measured against. Erasure in particular is
+              satisfied in an unusual way: the data sits in the student&rsquo;s own
+              browser, so they can clear it themselves without asking anyone.</li>
+          <li><strong>Creative Commons and attribution.</strong> Every image on this site
+              is an SVG written by hand as part of the project, so nothing is used under
+              a licence that requires attribution and nothing has been taken without
+              one. Had stock photography been used, each licence and attribution would
+              have needed to be recorded.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section aria-labelledby="lenses-heading">
+      <h2 id="lenses-heading">The six ethical lenses</h2>
+      <div class="card">
+        <p>When facing a difficult decision it is not just about following rules, laws or
+           emotions. The six lenses created by the Markkula Center for Applied Ethics
+           each provide a distinct framework for ethical reasoning, and examining a
+           problem through all six gives a more rounded view than any one of them does
+           alone.</p>
+        <ul>
+          <li><strong>The Right Lens</strong> &mdash; respect everyone&rsquo;s basic
+              rights, such as truth, privacy and the freedom to shape their own life
+              choices. <em>Does this decision honour and protect everyone&rsquo;s
+              rights?</em></li>
+          <li><strong>The Justice Lens</strong> &mdash; fairness: people receiving what
+              they are rightfully due, through equal treatment or fair distinction based
+              on need or merit, in its social, corrective, retributive and restorative
+              forms. <em>Does this decision uphold fairness for everyone involved?</em></li>
+          <li><strong>The Utilitarian Lens</strong> &mdash; consequences: maximise
+              benefit and minimise harm. <em>Which decision helps the most people while
+              causing the least harm?</em></li>
+          <li><strong>The Common Good Lens</strong> &mdash; the well-being of the entire
+              community rather than individual needs alone. <em>Does this action
+              contribute to a stronger, healthier community for everyone?</em></li>
+          <li><strong>The Virtue Lens</strong> &mdash; character and growth: becoming a
+              good person, not only making the right call in the moment. <em>How is this
+              action shaping the person I am becoming?</em></li>
+          <li><strong>The Care Ethics Lens</strong> &mdash; relationships and empathy,
+              understanding people&rsquo;s emotions and unique circumstances. <em>Am I
+              demonstrating empathy and consideration for those affected?</em></li>
+        </ul>
+        <p>No single lens provides all the answers, and at times they conflict. That is
+           the point of having six: the conflict is information, not a problem to be
+           tidied away.</p>
+
+        <h3>The lenses applied to one real decision</h3>
+        <p>Rather than run all six over every feature, I applied them to the decision
+           that was a genuine trade-off: removing the organiser contact email field from
+           the create-event form.</p>
+        <ul>
+          <li><strong>Right</strong> &mdash; students have a right to decide who can
+              contact them. Storing addresses takes that decision away from an organiser
+              who only wanted a listing.</li>
+          <li><strong>Justice</strong> &mdash; the same rule applies to every society: no
+              group gets its contact details published and no group is left out.</li>
+          <li><strong>Utilitarian</strong> &mdash; the field saves a few students a
+              search; a leak exposes every organiser. Small benefit spread thin, large
+              harm concentrated.</li>
+          <li><strong>Common good</strong> &mdash; a directory students trust is worth
+              more to everyone than one that is marginally more convenient but collects
+              more than it needs.</li>
+          <li><strong>Virtue</strong> &mdash; I could explain &ldquo;we did not collect
+              it&rdquo; to a room of students. I could not comfortably explain &ldquo;we
+              collected it in case it turned out to be useful&rdquo;.</li>
+          <li><strong>Care</strong> &mdash; not the average user, but the student whose
+              event is a Pride society meet-up or a prayer group, for whom being on a
+              contactable list is a different proposition.</li>
+        </ul>
+
+        <h3>Where the lenses disagree</h3>
+        <p>The audit trail is the case where they pull in opposite directions. Justice
+           and the common good argue for logging who deleted an event, because
+           accountability is a form of fairness. The right and care lenses argue against
+           it, because an audit log is a standing record of identifiable activity. The
+           answer is not to pick a favourite lens but to look for the option that
+           survives most of them &mdash; which is why the resolution below logs
+           administrator actions only and leaves ordinary browsing unlogged.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="process-heading">
+      <h2 id="process-heading">The five-step decision process, applied</h2>
+      <div class="card">
+        <p>The course sets out a five-step process for working through an ethical
+           decision. Run over the email field decision, it looks like this.</p>
+        <ol>
+          <li><strong>Identify the ethical issue.</strong> Could this cause harm, or
+              benefit some people more than others? A stored list of organiser addresses
+              benefits the application and carries the risk for the organisers, so the
+              people taking the risk are not the people getting the benefit. That split
+              is what makes it ethical rather than merely technical.</li>
+          <li><strong>Gather the facts.</strong> Affected parties are the organisers
+              whose addresses would be stored, the students who would use them, and the
+              university whose name is on the directory. The options were: collect and
+              display the address, collect it but hide it behind the login, or not
+              collect it and let descriptions say &ldquo;contact the society&rdquo;.</li>
+          <li><strong>Evaluate the options using the lenses.</strong> The six-lens run
+              above. All six point the same way, which is the signal that the decision is
+              not finely balanced.</li>
+          <li><strong>Choose the action and test it.</strong> Would I be comfortable
+              explaining this publicly? &ldquo;We decided not to hold your email
+              address&rdquo; is a comfortable sentence to say to a room of student
+              organisers. &ldquo;We held it because it might be useful later&rdquo; is
+              not, and that discomfort is the test doing its job.</li>
+          <li><strong>Reflect on the outcome.</strong> The cost was real: students cannot
+              contact an organiser directly from the listing. The follow-up is to make
+              the notes field carry that information in a form the organiser chooses to
+              publish, which keeps the decision with the person it belongs to. Reflect,
+              refine, repeat.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Part 2 - the application -->
+    <section aria-labelledby="ethics-heading">
+      <h2 id="ethics-heading">Features that support ethical data use</h2>
+
+      <div class="card">
+        <h3>1. Data minimisation &mdash; the application collects no personal data at all</h3>
+        <p>The strongest privacy measure available was to not collect the data in the
+           first place. Every field on the create-event form describes an <em>event</em>:
+           title, course, category, date, time, mode, location, description and notes.
+           There is no field for the organiser&rsquo;s name, no email address, no phone
+           number, no student ID, and no attendee list.</p>
+        <p>This was a deliberate choice rather than an oversight. An earlier version of
+           my field list included an &ldquo;organiser contact email&rdquo; so that
+           students could get in touch about an event. I removed it, because storing a
+           list of contactable addresses turns a harmless directory into a target worth
+           attacking, and because a description can simply say &ldquo;contact the
+           society&rdquo; without the system holding the address itself. Collecting less
+           data means there is less to lose, less to secure, and less to misuse.</p>
+
+        <h3>2. No tracking of who looks at what</h3>
+        <p>The application records which events exist. It does not record who searched
+           for what, which events were viewed, how long anyone spent reading a
+           description, or which categories a user filters by most often. All of that
+           would be easy to add and commercially tempting, and all of it would build a
+           profile of a student&rsquo;s interests without their knowledge.</p>
+        <p>There are no analytics scripts, no third-party trackers, no advertising pixels
+           and no cookies. Every file the site loads comes from within the project
+           folder, which you can verify by opening the browser&rsquo;s Network tab: every
+           request is to a local file.</p>
+
+        <h3>3. Honest, non-manipulative interface design</h3>
+        <p>Deleting an event triggers a confirmation dialog that names the event and
+           states plainly that the action cannot be undone, and <em>Cancel</em> is a real
+           option rather than a greyed-out discouragement. This is the opposite of a
+           <strong>dark pattern</strong> &mdash; an interface deliberately designed to
+           push a user into the choice that serves the system rather than the user.
+           Similarly, a recommendation is an explicit button press that can be pressed
+           again to undo, so nothing is recommended on a student&rsquo;s behalf from
+           inferred behaviour.</p>
+
+        <h3>4. Accessibility as an ethical obligation</h3>
+        <p>An application that excludes disabled students is not ethically neutral. Each
+           image carries descriptive <code>alt</code> text; form fields are joined to
+           their labels with <code>for</code> and <code>id</code>; error messages are
+           marked <code>aria-invalid</code> and announced through
+           <code>role="alert"</code>; the keyboard focus outline is deliberately kept
+           visible rather than removed for appearance; and colour is never the only
+           signal &mdash; a recommended event is marked by the word
+           &ldquo;Recommended&rdquo; as well as by an amber badge, so it is still
+           identifiable to a colour-blind user.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="privacy-heading">
+      <h2 id="privacy-heading">Features that support data privacy</h2>
+
+      <div class="card">
+        <h3>1. Access control on the page that can change data</h3>
+        <p>The events directory is behind a login, so the create, update and delete
+           controls are not available to an anonymous visitor. This is the
+           <strong>principle of least privilege</strong>: the ability to change or
+           destroy data is restricted to the role that needs it.</p>
+        <p>The failure message is part of the design too. When a sign-in fails the
+           application says <em>&ldquo;Incorrect username or password&rdquo;</em> rather
+           than <em>&ldquo;No such user&rdquo;</em>. A message naming which half was
+           wrong would confirm to an attacker which usernames exist, letting them build a
+           list of valid accounts before they start guessing passwords. This is called
+           <strong>username enumeration</strong>, and avoiding it costs nothing.</p>
+
+        <h3>2. The session ends when the browser closes</h3>
+        <p>The signed-in state is held in <code>sessionStorage</code>, not
+           <code>localStorage</code>. <code>localStorage</code> survives until explicitly
+           cleared, so a student who signed in on a library computer would still be
+           signed in for the next person who sat down; <code>sessionStorage</code> is
+           discarded when the tab closes. Only the username is stored &mdash; the
+           password is compared and then discarded, so it cannot be recovered afterwards
+           by inspecting the browser &mdash; and a <em>Sign out</em> button lets a user
+           end the session deliberately.</p>
+
+        <h3>3. Input validation, which protects the system as well as the data</h3>
+        <p>Every field is validated before anything is saved: required fields must not be
+           empty, text fields have minimum lengths, times must be real 24-hour times, and
+           dates must be real calendar dates &mdash; a date such as 30 February has the
+           right shape but does not exist, and is rejected by rebuilding the date and
+           checking the browser did not silently roll it over into March. Dates more than
+           five years away are rejected as probable typing errors. Validation is a
+           privacy measure and not only a tidiness measure: unvalidated input is the entry
+           point for most common web attacks.</p>
+
+        <h3>4. Protection against cross-site scripting</h3>
+        <p>This is the most important technical privacy control in the application.
+           Every piece of event text is placed on the page using
+           <code>textContent</code>, never <code>innerHTML</code>:</p>
+        <pre><code>// js/events.js - how every piece of user text reaches the page
+function el(tag, className, text) {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text !== undefined) node.textContent = text;   // text, never markup
+    return node;
+}</code></pre>
+        <p>The difference is critical. <code>innerHTML</code> parses the string it is
+           given as HTML, so an event title of
+           <code>&lt;img src=x onerror=alert(1)&gt;</code> would be turned into a real
+           element and the JavaScript inside it would run. <code>textContent</code>
+           writes the string as literal characters, so the same input is displayed as the
+           text a user typed and nothing executes. This is a <strong>cross-site
+           scripting (XSS)</strong> defence, and it matters here because the application
+           displays text that one user typed to a different user &mdash; exactly the
+           situation XSS exploits. A successful XSS attack on a real deployment could
+           read another student&rsquo;s session and act as them.</p>
+        <p>I verified this works by entering
+           <code>&lt;img src=x onerror=alert(1)&gt;</code> as an event title and
+           confirming it appeared on screen as those literal characters, with no image
+           element created and no script run.</p>
+
+        <h3>5. The data never leaves the student&rsquo;s own device</h3>
+        <p>Events are stored in the browser&rsquo;s <code>localStorage</code> on the
+           machine where they were entered. There is no server, no database and no
+           network request, so nothing a user types is transmitted anywhere. For a
+           directory of public campus events this is a reasonable architecture, and it
+           means a student can clear everything the application knows about them using
+           their own browser settings, without asking anyone&rsquo;s permission.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="limits-heading">
+      <h2 id="limits-heading">Honest limitations of this implementation</h2>
+
+      <div class="card">
+        <p>Claiming this application is secure would itself be an ethical failure, so
+           these are the places where the implementation is weaker than it may appear.</p>
+
+        <h3>The login is not real security</h3>
+        <p>The username and password are written in <code>js/auth.js</code>, which the
+           browser downloads in full, so anyone can read them from the page source or the
+           developer tools. Real authentication cannot be done in the browser alone,
+           because any check that runs on the user&rsquo;s machine can be bypassed by the
+           user. It requires a server that stores a <strong>hash</strong> of the password
+           produced by a slow algorithm designed for the purpose, such as bcrypt or
+           Argon2 &mdash; never the password itself &mdash; compares a submitted password
+           against that hash, and returns a signed session token, leaving the browser only
+           to carry the token. Since this assignment is a client-side application with no
+           server, the login here is the honest limit of what is achievable, and I would
+           not deploy it to protect anything that mattered.</p>
+
+        <h3>localStorage is not encrypted or protected</h3>
+        <p>Data in <code>localStorage</code> is stored as plain text and is readable by
+           anyone with access to the computer, and by any JavaScript running on the same
+           origin. It is appropriate for public event listings and would not be
+           appropriate for anything private.</p>
+
+        <h3>There is no audit trail</h3>
+        <p>Because no identity is recorded against an action, the system cannot tell who
+           deleted an event. There is a genuine tension here: an audit log would improve
+           accountability, but it would also mean recording identifiable activity for
+           every user, which is exactly what data minimisation avoids. A production
+           system would resolve this by logging <em>administrator</em> actions, where
+           accountability outweighs the privacy cost, while continuing not to log
+           ordinary browsing.</p>
+
+        <h3>What I would add with more time</h3>
+        <ul>
+          <li>A visible privacy notice stating what is stored and for how long, which is
+              the APP 5 gap identified above.</li>
+          <li>A server with a database, properly hashed passwords and session tokens.</li>
+          <li>HTTPS, so data in transit cannot be read on a shared campus network.</li>
+          <li>A retention rule that removes events a set period after they finish, so the
+              directory does not accumulate data indefinitely.</li>
+          <li>Rate limiting on the login form to slow down password guessing.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section aria-labelledby="summary-heading">
+      <h2 id="summary-heading">Summary</h2>
+      <div class="card">
+        <p>Most privacy protection is decided at design time, not added afterwards. The
+           decision not to collect organiser email addresses protects more students than
+           any security measure added later, because data that was never collected cannot
+           be breached &mdash; and all six lenses agreed on it. Equally, the choice
+           between <code>textContent</code> and <code>innerHTML</code> is a single word in
+           a single function, and it is the difference between an application that is safe
+           to display other people&rsquo;s text in and one that is not. Being clear about
+           what this application does <em>not</em> protect is part of the same
+           responsibility.</p>
+      </div>
+    </section>
+
+    <!-- Sources -->
+    <section aria-labelledby="sources-heading">
+      <h2 id="sources-heading">Sources</h2>
+      <div class="card">
+        <ul>
+          <li>INFO 1012 Week 8 Tutorial, <em>Ethics &amp; Privacy</em> &mdash; the
+              framework, theories, governance material and lenses used on this page.</li>
+          <li>Calder, A. 2007, <em>IT Governance: A Pocket Guide</em>, 1st edn, IT
+              Governance Publishing.</li>
+          <li>Ebert, C., Vizcaino, A. &amp; Manjavacas, A. 2020, &lsquo;IT
+              Governance&rsquo;, <em>IEEE Software</em>, vol.&nbsp;37, no.&nbsp;6,
+              pp.&nbsp;13&ndash;20.</li>
+          <li>Floridi, L. 2006, &lsquo;Four challenges for a theory of informational
+              privacy&rsquo;, <em>Ethics and Information Technology</em>, vol.&nbsp;8,
+              no.&nbsp;3, pp.&nbsp;109&ndash;119.</li>
+          <li>Floridi, L. 2016, <em>On human dignity as a foundation for the right to
+              privacy</em>, Chefuturo.</li>
+          <li>Gartner 2023, <em>IT Governance (ITG)</em>, Gartner Glossary.</li>
+          <li>Markkula Center for Applied Ethics, Santa Clara University &mdash; the six
+              ethical lenses and the five-step decision process.</li>
+          <li>Mill, J.S. 1885, <em>Principles of Political Economy</em>, D Appleton and
+              Company, New York.</li>
+          <li>Moor, J. 1990, &lsquo;Ethics of privacy protection&rsquo;, <em>Library
+              Trends</em>, vol.&nbsp;39, nos.&nbsp;1&nbsp;&amp;&nbsp;2,
+              pp.&nbsp;69&ndash;82.</li>
+          <li>Nissenbaum, H. 2010, <em>Privacy in Context</em>, 1st edn, Stanford
+              University Press, Stanford, California.</li>
+          <li>Reiman, J.H. 1976, &lsquo;Privacy, intimacy, and personhood&rsquo;,
+              <em>Philosophy &amp; Public Affairs</em>, vol.&nbsp;6, no.&nbsp;1,
+              pp.&nbsp;26&ndash;44.</li>
+          <li>Warren, S.D. &amp; Brandeis, L.D. 1890, <em>The Right to Privacy</em>, 2012
+              edn, University of Washington Press, Seattle.</li>
+          <li>Westin, A.F. 1967, <em>Privacy and Freedom</em>, Atheneum, New York.</li>
+          <li>Australian Computer Society, <em>ACS Code of Professional Ethics</em> and
+              <em>Code of Professional Conduct</em>.</li>
+          <li>Office of the Australian Information Commissioner, <em>Australian Privacy
+              Principles</em>, under the <em>Privacy Act 1988</em> (Cth).</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span>Adelaide Campus Events - INFO 1012 Assignment 3</span>
+      <span>Current date and time: <strong><time id="live-clock"></time></strong></span>
+    </div>
+  </footer>
+
+  <script src="js/clock.js"></script>
+</body>
+</html>
