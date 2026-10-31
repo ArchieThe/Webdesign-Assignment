@@ -1,4 +1,4 @@
-/* data.js  */
+/* data.js — the events the directory starts with */
 
 const SEED_EVENTS = [
   {
@@ -16,6 +16,45 @@ const SEED_EVENTS = [
   },
   {
     id: 'evt-002',
+    title: 'Computer Science Study Group',
+    course: 'Open to all Computer Science students',
+    category: 'Academic',
+    date: '2026-11-11',
+    time: '15:00',
+    mode: 'Face-to-face',
+    location: 'North Terrace Campus, Hub Central Level 4',
+    description: 'A weekly study group for computer science students. A chance to learn more about computer science topics outside of class and get more hands-on practice with the material, working through problems together rather than alone.',
+    notes: 'Bring a laptop. No sign-up needed, just turn up.',
+    recommended: true
+  },
+  {
+    id: 'evt-003',
+    title: 'Volleyball Socials',
+    course: '',
+    category: 'Sports',
+    date: '2026-11-18',
+    time: '18:00',
+    mode: 'Face-to-face',
+    location: 'Adelaide University Sports Association, Park 10 Courts',
+    description: 'Social volleyball open to all skill levels. An activity that is not related to studies and makes a good break from academic work. Teams are picked on the night so you can come on your own.',
+    notes: 'Wear indoor court shoes. First session is free.',
+    recommended: false
+  },
+  {
+    id: 'evt-004',
+    title: 'First Year General Meet Up',
+    course: '',
+    category: 'Social',
+    date: '2026-11-13',
+    time: '17:00',
+    mode: 'Face-to-face',
+    location: 'North Terrace Campus, The Lady Symon Building',
+    description: 'An informal meet up for first year students. A chance to connect with other students and with faculty in a non-class setting, which is harder to do during normal teaching weeks.',
+    notes: 'Light refreshments provided.',
+    recommended: false
+  },
+  {
+    id: 'evt-005',
     title: 'INFO 1012 Practical Exam Revision Session',
     course: 'INFO 1012 Information Technology Systems',
     category: 'Academic',
@@ -25,23 +64,10 @@ const SEED_EVENTS = [
     location: 'North Terrace Campus, Ingkarni Wardli B17',
     description: 'A revision session covering the whole course ahead of the practical exam: number representations, operating systems, web technologies and the TCP/IP model. Bring questions from the weekly studios.',
     notes: 'The practical exam carries a 50% hurdle, so this one is worth turning up to.',
-    recommended: true
-  },
-  {
-    id: 'evt-003',
-    title: 'Computer Science Club Game Jam',
-    course: '',
-    category: 'Social',
-    date: '2026-11-14',
-    time: '17:30',
-    mode: 'Face-to-face',
-    location: 'North Terrace Campus, Hub Central Level 4',
-    description: 'A 24-hour game jam run by the Computer Science Club. Teams of up to four build a small game from a theme announced on the night. Beginners are welcome and there is a separate first-year prize.',
-    notes: 'Bring a laptop and a power board. Pizza provided at 8pm.',
     recommended: false
   },
   {
-    id: 'evt-004',
+    id: 'evt-006',
     title: 'Tech Industry Careers Night',
     course: '',
     category: 'Careers',
@@ -54,20 +80,7 @@ const SEED_EVENTS = [
     recommended: false
   },
   {
-    id: 'evt-005',
-    title: 'Social Sport: Wednesday Indoor Soccer',
-    course: '',
-    category: 'Sports',
-    date: '2026-11-04',
-    time: '19:00',
-    mode: 'Face-to-face',
-    location: 'Adelaide University Sports Association, Park 10 Courts',
-    description: 'Weekly mixed indoor soccer run through the Sports Association. Teams are drawn on the night so you can come without a team, and no previous experience is expected.',
-    notes: 'Registration is per semester. Wear indoor court shoes.',
-    recommended: false
-  },
-  {
-    id: 'evt-006',
+    id: 'evt-007',
     title: 'International Student Welcome Festival',
     course: '',
     category: 'Cultural',
@@ -77,19 +90,6 @@ const SEED_EVENTS = [
     location: 'North Terrace Campus, Barr Smith Lawns',
     description: 'A festival opening the new academic year with food stalls, performances and information stands from cultural societies across the university. A good first stop for meeting people outside your own degree.',
     notes: 'Runs across the whole day; societies take sign-ups at their stalls.',
-    recommended: false
-  },
-  {
-    id: 'evt-007',
-    title: 'Introduction to Git and GitHub for First Years',
-    course: 'SCSIT Student Learning',
-    category: 'Academic',
-    date: '2026-11-11',
-    time: '13:00',
-    mode: 'Online',
-    location: 'Online via Microsoft Teams',
-    description: 'A hands-on session covering version control basics: repositories, commits, branches, and pushing work to a remote on GitHub. Aimed at students who have used GitHub Classroom but are not confident with the command line.',
-    notes: 'A recording is made available afterwards on MyUni.',
     recommended: false
   }
 ];
